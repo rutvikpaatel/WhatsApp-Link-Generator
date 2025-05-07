@@ -131,3 +131,43 @@ button:hover {
   background-size: contain;
   pointer-events: none;
 }
+/* ✅ Mobile Responsive Styles */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input[type="text"],
+  textarea,
+  select {
+    font-size: 0.95rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .button-link {
+    font-size: 0.85rem;
+    padding: 7px 12px;
+  }
+
+  .select-wrapper::after {
+    width: 20px;
+    height: 20px;
+  }
+}
