@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WhatsApp Link Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>WhatsApp Link Generator</h1>
+
+    <label for="format">Link Format:</label>
+    <div class="select-wrapper">
+      <select id="format">
+        <option value="wa.me">wa.me</option>
+        <option value="api">api.whatsapp.com</option>
+      </select>
+    </div>
+
+    <label for="countryCode">Country Code:</label>
+    <div class="select-wrapper">
+      <select id="countryCode">
+        <option value="1" data-country="US">🇺🇸 +1 (USA)</option>
+        <option value="44" data-country="GB">🇬🇧 +44 (UK)</option>
+        <option value="91" data-country="IN">🇮🇳 +91 (India)</option>
+        <option value="61" data-country="AU">🇦🇺 +61 (Australia)</option>
+        <option value="81" data-country="JP">🇯🇵 +81 (Japan)</option>
+        <option value="49" data-country="DE">🇩🇪 +49 (Germany)</option>
+        <option value="33" data-country="FR">🇫🇷 +33 (France)</option>
+        <option value="55" data-country="BR">🇧🇷 +55 (Brazil)</option>
+        <option value="234" data-country="NG">🇳🇬 +234 (Nigeria)</option>
+        <option value="966" data-country="SA">🇸🇦 +966 (Saudi Arabia)</option>
+      </select>
+    </div>
+
+    <label for="phone">Phone Number (without country code):</label>
+    <input type="text" id="phone" placeholder="e.g., 5551234567">
+
+    <label for="message">Message:</label>
+    <textarea id="message" rows="4" placeholder="Type your message here..."></textarea>
+
+    <button onclick="generateLink()">Generate Link</button>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    // Auto-detect country on load
+    window.addEventListener("DOMContentLoaded", function () {
+      fetch("https://ipapi.co/json/")
+        .then(response => response.json())
+        .then(data => {
+          const userCountry = data.country;
+          const select = document.getElementById("countryCode");
+          for (let option of select.options) {
+            if (option.dataset.country === userCountry) {
+              select.value = option.value;
+              break;
+            }
+          }
+        })
+        .catch(() => console.warn("Country detection failed."));
+    });
+
+    function generateLink() {
+      const countryCode = document.getElementById("countryCode").value;
+      const phone = document.getElementById("phone").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const format = document.getElementById("format").value;
+
+      if (!phone) {
+        alert("Please enter a phone number.");
+        return;
+      }
+
+      const fullPhone = countryCode + phone.replace(/\D/g, '');
+      const encodedMessage = encodeURIComponent(message);
+      let link = "";
+
+      if (format === "wa.me") {
+        link = `https://wa.me/${fullPhone}?text=${encodedMessage}`;
+      } else {
+        link = `https://api.whatsapp.com/send?phone=${fullPhone}&text=${encodedMessage}`;
+      }
+
+      document.getElementById("output").innerHTML = `
+        <div class="result">
+          <strong>Generated Link:</strong>
+          <p>${link}</p>
+          <a href="#" class="button-link copy" onclick="copyToClipboard('${link}')">📋 Copy Link</a>
+          <a href="${link}" class="button-link open" target="_blank">🔗 Open Link</a>
+        </div>
+      `;
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Link copied to clipboard!");
+      }).catch(() => {
+        alert("Failed to copy link.");
+      });
+    }
+  </script>
+</body>
+</html>
