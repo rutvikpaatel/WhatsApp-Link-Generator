@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WhatsApp Link Generator</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -35,12 +36,12 @@
     </div>
 
     <label for="phone">Phone Number (without country code):</label>
-    <input type="text" id="phone" placeholder="e.g., 5551234567">
+    <input type="text" id="phone" placeholder="e.g., 5551234567" autocomplete="off">
 
     <label for="message">Message:</label>
-    <textarea id="message" rows="4" placeholder="Type your message here..."></textarea>
+    <textarea id="message" rows="4" placeholder="Type your message here..." autocomplete="off"></textarea>
 
-    <button onclick="generateLink()">Generate Link</button>
+    <button type="button" onclick="generateLink()">Generate Link</button>
 
     <div id="output"></div>
   </div>
