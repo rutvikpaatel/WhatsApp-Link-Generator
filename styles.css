@@ -1,31 +1,26 @@
+/* === Light Mode (Default) === */
 body {
-  font-family: sans-serif;
-
-  /* ✅ Load image from a folder path */
-  background-image: url("Images/background.png");
-
-  /* ✅ Fallback if image is missing */
-  background-color: #FCF5EB;
-
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #F0F2F5;
   padding: 20px;
+  margin: 0;
+  color: #1f1f1f;
 }
 
 .container {
   max-width: 500px;
   margin: auto;
-  background: #fff;
+  background: #ffffff;
   padding: 25px 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 h1 {
   text-align: center;
   color: #075E54;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 label {
@@ -33,18 +28,28 @@ label {
   margin-top: 15px;
   margin-bottom: 5px;
   font-weight: 600;
-  color: #333;
+  color: #202124;
 }
 
 input[type="text"],
 textarea,
 select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 12px 14px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #d1d7db;
+  border-radius: 10px;
   box-sizing: border-box;
+  background-color: #ffffff;
+  color: #1f1f1f;
+  transition: border 0.2s ease-in-out;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #25D366;
+  outline: none;
 }
 
 textarea {
@@ -55,11 +60,12 @@ button {
   background-color: #25D366;
   color: white;
   border: none;
-  padding: 12px;
+  padding: 14px;
   margin-top: 20px;
   width: 100%;
   font-size: 16px;
-  border-radius: 6px;
+  border-radius: 10px;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -70,10 +76,10 @@ button:hover {
 
 .result {
   margin-top: 20px;
-  background: #e9f5ef;
+  background: #e2f6ec;
   padding: 15px;
-  border-radius: 6px;
-  border: 1px solid #cce5dc;
+  border-radius: 10px;
+  border: 1px solid #b2e2cd;
 }
 
 .result p {
@@ -87,18 +93,18 @@ button:hover {
   margin-right: 10px;
   margin-top: 10px;
   background: #075E54;
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 4px;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 8px;
   text-decoration: none;
   font-size: 14px;
+  transition: background 0.2s ease;
 }
 
 .button-link:hover {
   background: #064c45;
 }
 
-/* Custom Select Styling */
 .select-wrapper {
   position: relative;
   margin-bottom: 20px;
@@ -106,32 +112,29 @@ button:hover {
 
 .select-wrapper select {
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   background: #fff;
   border: 1px solid #ccc;
-  padding: 10px 40px 10px 12px;
+  padding: 12px 40px 12px 14px;
   font-size: 16px;
-  border-radius: 6px;
+  border-radius: 10px;
   width: 100%;
   cursor: pointer;
 }
 
-/* SVG Arrow Icon for Dropdown */
 .select-wrapper::after {
   content: "";
   position: absolute;
   top: 50%;
   right: 15px;
   transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%231f1f1f'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E");
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%231f1f1f'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-size: contain;
   pointer-events: none;
 }
-/* ✅ Mobile Responsive Styles */
+
 @media (max-width: 600px) {
   body {
     padding: 10px;
@@ -139,15 +142,15 @@ button:hover {
 
   .container {
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 16px;
   }
 
   h1 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   label {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   input[type="text"],
@@ -158,16 +161,84 @@ button:hover {
 
   button {
     font-size: 0.95rem;
-    padding: 10px;
+    padding: 12px;
   }
 
   .button-link {
     font-size: 0.85rem;
-    padding: 7px 12px;
+    padding: 8px 14px;
   }
 
   .select-wrapper::after {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* === Dark Mode === */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121B22;
+    color: #EDEDED;
+  }
+
+  .container {
+    background-color: #1E2C33;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  h1 {
+    color: #25D366;
+  }
+
+  label {
+    color: #EDEDED;
+  }
+
+  input[type="text"],
+  textarea,
+  select {
+    background-color: #2A3942;
+    color: #EDEDED;
+    border: 1px solid #3c4b54;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #25D366;
+  }
+
+  .result {
+    background: #2A3942;
+    border: 1px solid #3c4b54;
+  }
+
+  .button-link {
+    background: #25D366;
+    color: #121B22;
+  }
+
+  .button-link:hover {
+    background: #1ebe5d;
+  }
+
+  button {
+    background-color: #25D366;
+    color: #121B22;
+  }
+
+  button:hover {
+    background-color: #1ebe5d;
+  }
+
+  .select-wrapper select {
+    background-color: #2A3942;
+    color: #EDEDED;
+    border: 1px solid #3c4b54;
+  }
+
+  .select-wrapper::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23EDEDED'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E");
   }
 }
