@@ -7,11 +7,9 @@
   <link rel="stylesheet" href="styles.css" />
 
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#25D366" />
   <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-
 </head>
 <body>
 
@@ -49,74 +47,12 @@
     <textarea id="message" rows="4" placeholder="Type your message here..." autocomplete="off"></textarea>
 
     <button type="button" onclick="generateLink()">Generate Link</button>
+    
+    <div id="error" class="error-message" style="display: none;"></div>
 
     <div id="output"></div>
   </div>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('SW registered', reg))
-        .catch(err => console.error('SW failed', err));
-    }
-  </script>
-
-  <script>
-    // Auto-detect country on load
-    window.addEventListener("DOMContentLoaded", function () {
-      fetch("https://ipapi.co/json/")
-        .then(response => response.json())
-        .then(data => {
-          const userCountry = data.country;
-          const select = document.getElementById("countryCode");
-          for (let option of select.options) {
-            if (option.dataset.country === userCountry) {
-              select.value = option.value;
-              break;
-            }
-          }
-        })
-        .catch(() => console.warn("Country detection failed."));
-    });
-
-    function generateLink() {
-      const countryCode = document.getElementById("countryCode").value;
-      const phone = document.getElementById("phone").value.trim();
-      const message = document.getElementById("message").value.trim();
-      const format = document.getElementById("format").value;
-
-      if (!phone) {
-        alert("Please enter a phone number.");
-        return;
-      }
-
-      const fullPhone = countryCode + phone.replace(/\D/g, '');
-      const encodedMessage = encodeURIComponent(message);
-      let link = "";
-
-      if (format === "wa.me") {
-        link = `https://wa.me/${fullPhone}?text=${encodedMessage}`;
-      } else {
-        link = `https://api.whatsapp.com/send?phone=${fullPhone}&text=${encodedMessage}`;
-      }
-
-      document.getElementById("output").innerHTML = `
-        <div class="result">
-          <strong>Generated Link:</strong>
-          <p>${link}</p>
-          <a href="#" class="button-link copy" onclick="copyToClipboard('${link}')">📋 Copy Link</a>
-          <a href="${link}" class="button-link open" target="_blank">🔗 Open Link</a>
-        </div>
-      `;
-    }
-
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Link copied to clipboard!");
-      }).catch(() => {
-        alert("Failed to copy link.");
-      });
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
