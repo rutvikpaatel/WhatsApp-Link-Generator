@@ -37,3 +37,19 @@ function generateLink() {
     </div>
   `;
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  fetch('https://ipapi.co/json/')
+    .then(res => res.json())
+    .then(data => {
+      const countryCode = data.country_code; // e.g., "IN"
+      const select = document.getElementById("countryCode");
+      for (let option of select.options) {
+        if (option.dataset.country === countryCode) {
+          select.value = option.value;
+          break;
+        }
+      }
+    })
+    .catch(err => console.error("IP geolocation failed:", err));
+});
