@@ -13,7 +13,7 @@ function generateLink() {
   outputBox.innerHTML = "";
 
   if (!phone) {
-    errorBox.innerText = "❗ Please enter a phone number.";
+    errorBox.innerText = "❗ Please Enter A Phone Number.";
     errorBox.style.display = "block";
     return;
   }
