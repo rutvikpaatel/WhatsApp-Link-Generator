@@ -38,12 +38,16 @@ function generateLink() {
   `;
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+window.onload = () => {
   fetch('https://ipapi.co/json/')
     .then(res => res.json())
     .then(data => {
       const countryCode = data.country_code; // e.g., "IN"
       const select = document.getElementById("countryCode");
+      if (!select) {
+        console.error("Dropdown not found!");
+        return;
+      }
       for (let option of select.options) {
         if (option.dataset.country === countryCode) {
           select.value = option.value;
@@ -52,4 +56,4 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     })
     .catch(err => console.error("IP geolocation failed:", err));
-});
+};
